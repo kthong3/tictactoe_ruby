@@ -4,10 +4,15 @@ def pretty_print
   board = []
   split_range = (1..9).to_a.each_slice(3) {|set| board << set }
 
-  board.each do |set|
-    p set
+  board.map! do |set|
+    set.join("").insert(1, "|").insert(3, "|")
   end
-    # 1.upto(9) { |i| print i, " | " }
+
+  board.insert(1, "_____").insert(3, "_____")
+
+  board.each do |set|
+    puts set
+  end
 end
 
 pretty_print
