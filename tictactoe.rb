@@ -22,8 +22,6 @@ class Game
       num_str = number.to_s
       if set.include?(num_str)
         mark_location(set, num_str, letter)
-      else
-        "That spot has been taken, please try again."
       end
     end
   end
