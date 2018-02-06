@@ -31,24 +31,28 @@ class Game
       end
     end
   end
+
+  def pretty_print
+    @board.each do |set|
+      puts set
+    end
+  end
 end
 
 game = Game.new
-
 
 puts "Player one, please enter the number where you'd like to mark"
 player_one_num = gets.chomp
 player_one_letter = "X"
 
 game.check_location(player_one_num, player_one_letter)
+game.pretty_print
 
-game.board.each do |set|
-  puts set
-end
+puts "Player two, please enter the number where you'd like to mark"
+player_two_num = gets.chomp
+player_two_letter = "O"
 
+game.check_location(player_two_num, player_two_letter)
+game.pretty_print
 
-# puts "Player two, please enter the number where you'd like to mark"
-# player_two_num = gets.chomp
-# player_two_letter = "O"
-
-# game.check_location(player_two_num, player_two_letter)
+p game.board
