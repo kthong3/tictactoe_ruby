@@ -1,4 +1,6 @@
 class Game
+  attr_accessor :board
+
   def initialize
     @board = []
     set_up(@board)
@@ -21,21 +23,36 @@ class Game
 
   def check_location(number, letter)
     @board.each do |set|
-      if set.include?(number)
-        location = set.index(number).to_s
-        replace = set.gsub!(location, letter)
+      if set.include?(number.to_s)
+        location = set.index(number.to_s)
+        set[location] = letter
       else
         "That spot has been taken, please try again."
       end
-      puts set
     end
   end
 
+  def pretty_print
+    @board.each do |set|
+      puts set
+    end
+  end
 end
 
 game = Game.new
 
 puts "Player one, please enter the number where you'd like to mark"
-number = gets.chomp
-letter = "X"
-game.check_location(number, letter)
+player_one_num = gets.chomp
+player_one_letter = "X"
+
+game.check_location(player_one_num, player_one_letter)
+game.pretty_print
+
+puts "Player two, please enter the number where you'd like to mark"
+player_two_num = gets.chomp
+player_two_letter = "O"
+
+game.check_location(player_two_num, player_two_letter)
+game.pretty_print
+
+p game.board
