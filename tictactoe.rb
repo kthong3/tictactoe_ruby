@@ -15,21 +15,22 @@ class Game
     end
 
     board.insert(1, "_____").insert(3, "_____")
-
-    board.each do |set|
-      puts set
-    end
   end
 
   def check_location(number, letter)
     @board.each do |set|
-      if set.include?(number.to_s)
-        location = set.index(number.to_s)
-        set[location] = letter
+      num_str = number.to_s
+      if set.include?(num_str)
+        mark_location(set, num_str, letter)
       else
         "That spot has been taken, please try again."
       end
     end
+  end
+
+  def mark_location(set, num_str, letter)
+    location = set.index(num_str)
+    set[location] = letter
   end
 
   def pretty_print
@@ -40,6 +41,8 @@ class Game
 end
 
 game = Game.new
+
+game.pretty_print
 
 puts "Player one, please enter the number where you'd like to mark"
 player_one_num = gets.chomp
@@ -54,5 +57,3 @@ player_two_letter = "O"
 
 game.check_location(player_two_num, player_two_letter)
 game.pretty_print
-
-p game.board
