@@ -4,6 +4,10 @@ class Game
   def initialize
     @board = []
     set_up(@board)
+    @player_one = "Player one"
+    @player_two = "Player two"
+    @player_one_letter = "X"
+    @player_two_letter = "O"
   end
 
   # create board
@@ -17,14 +21,24 @@ class Game
     board.insert(1, "_____").insert(3, "_____")
   end
 
+  def prompt(player, player_letter)
+    puts "#{player}, please enter the number where you'd like to mark"
+    player_response = gets.chomp
+
+    game.check_location(player_response, player_letter)
+    game.pretty_print
+  end
+
   def check_location(number, letter)
-    @board.each do |set|
-      num_str = number.to_s
-      if set.include?(num_str)
-        mark_location(set, num_str, letter)
-      else
-        "That spot has been taken, please try again."
+    num_str = number.to_s
+    if @board.join("").include?(num_str)
+      @board.each do |set|
+        if set.include?(num_str)
+          mark_location(set, num_str, letter)
+        end
       end
+    else
+      puts "That location has been taken, please try again."
     end
   end
 
