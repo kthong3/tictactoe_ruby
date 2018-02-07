@@ -1,5 +1,6 @@
 class Game
   attr_accessor :board
+  attr_reader :player_one, :player_two, :player_one_letter, :player_two_letter
 
   def initialize
     @board = []
@@ -58,16 +59,18 @@ game = Game.new
 
 game.pretty_print
 
-puts "Player one, please enter the number where you'd like to mark"
-player_one_num = gets.chomp
-player_one_letter = "X"
+game.prompt(game.player_one, game.player_one_letter)
 
-game.check_location(player_one_num, player_one_letter)
-game.pretty_print
+# puts "Player one, please enter the number where you'd like to mark"
+# player_one_num = gets.chomp
+# player_one_letter = "X"
 
-puts "Player two, please enter the number where you'd like to mark"
-player_two_num = gets.chomp
-player_two_letter = "O"
+# game.check_location(player_one_num, player_one_letter)
+# game.pretty_print
 
-game.check_location(player_two_num, player_two_letter)
+# puts "Player two, please enter the number where you'd like to mark"
+# player_two_num = gets.chomp
+# player_two_letter = "O"
+
+# game.check_location(player_two_num, player_two_letter)
 game.pretty_print
