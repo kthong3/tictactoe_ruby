@@ -55,10 +55,13 @@ class Game
   end
 
   def runner
-    prompt(@player_one, @player_one_letter)
-    pretty_print
-    prompt(@player_two, @player_two_letter)
-    pretty_print
+    board_string = @board.join("")
+    until !board_string.scan(/\D/).any?
+      prompt(@player_one, @player_one_letter)
+      pretty_print
+      prompt(@player_two, @player_two_letter)
+      pretty_print
+    end
   end
 end
 
