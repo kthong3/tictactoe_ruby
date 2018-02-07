@@ -20,14 +20,14 @@ class Game
     end
 
     board.insert(1, "_____").insert(3, "_____")
+    pretty_print
   end
 
   def prompt(player, player_letter)
     puts "#{player}, please enter the number where you'd like to mark"
     player_response = gets.chomp
 
-    game.check_location(player_response, player_letter)
-    game.pretty_print
+    check_location(player_response, player_letter)
   end
 
   def check_location(number, letter)
@@ -53,24 +53,15 @@ class Game
       puts set
     end
   end
+
+  def runner
+    prompt(@player_one, @player_one_letter)
+    pretty_print
+    prompt(@player_two, @player_two_letter)
+    pretty_print
+  end
 end
 
 game = Game.new
 
-game.pretty_print
-
-game.prompt(game.player_one, game.player_one_letter)
-
-# puts "Player one, please enter the number where you'd like to mark"
-# player_one_num = gets.chomp
-# player_one_letter = "X"
-
-# game.check_location(player_one_num, player_one_letter)
-# game.pretty_print
-
-# puts "Player two, please enter the number where you'd like to mark"
-# player_two_num = gets.chomp
-# player_two_letter = "O"
-
-# game.check_location(player_two_num, player_two_letter)
-game.pretty_print
+game.runner
