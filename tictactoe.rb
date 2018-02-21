@@ -6,17 +6,15 @@ class Game
 
   private
   def set_up(board)
-    # 1.upto(9) { |i| board << i}
-
     (1..9).each_slice(3) {|i| board << i}
-    p board
+
     board.each do |set|
-      set.insert(1, "|")
-      set.insert(3, "|")
+      set.insert(1, "|").insert(3, "|")
     end
 
+    board.map! {|set| set.join("")}
     p board
-    p @board
+    puts board
   end
 end
 
