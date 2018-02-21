@@ -11,8 +11,12 @@ class Game
     (1..9).each_slice(3) {|i| board << i}
     p board
     board.each do |set|
-      set.insert
+      set.insert(1, "|")
+      set.insert(3, "|")
     end
+
+    p board
+    p @board
   end
 end
 
