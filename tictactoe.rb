@@ -13,11 +13,14 @@ class Game
       location = gets.chomp
     end
 
-
+    check_location(location)
   end
 
-  def is_location_taken?(location)
-
+  def check_location(location)
+    board_string = @board.join("")
+    if !board_string.include?(location)
+      puts "Sorry that location is taken. Please try again."
+    end
   end
 
   private
@@ -31,20 +34,15 @@ class Game
 end
 
 class Player
+  attr_reader :number
   def initialize(args={})
-    @player_number = args[:player_number]
+    @number = args[:number]
     @letter = args[:letter]
   end
 end
 
 game = Game.new
-player_1 = Player.new(player_number: "1", letter: "X")
-player_2 = Player.new(player_number: "2", letter: "O")
+player_1 = Player.new(number: "Player 1", letter: "X")
+player_2 = Player.new(number: "Player 2", letter: "O")
 
-puts "Please select the location by typing a number."
-response = gets.chomp
-
-if response.scan(/\d+/).empty?
-  puts "Please select the location by typing a number."
-  response = gets.chomp
-end
+game.prompt(player_1.number)
