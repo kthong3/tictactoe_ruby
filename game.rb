@@ -1,3 +1,5 @@
+require_relative 'player'
+
 class Game
   def initialize
     @board = []
@@ -30,14 +32,6 @@ class Game
     board.map! {|set| set.insert(1, "|").insert(3, "|").join("")}
     p board
     puts board
-  end
-end
-
-class Player
-  attr_reader :number
-  def initialize(args={})
-    @number = args[:number]
-    @letter = args[:letter]
   end
 end
 
