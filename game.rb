@@ -1,9 +1,9 @@
+require_relative 'board'
 require_relative 'player'
 
 class Game
   def initialize
-    @board = []
-    set_up(@board)
+    set_up
   end
 
   def prompt(player)
@@ -18,20 +18,9 @@ class Game
     check_location(location)
   end
 
-  def check_location(location)
-    board_string = @board.join("")
-    if !board_string.include?(location)
-      puts "Sorry that location is taken. Please try again."
-    end
-  end
-
   private
-  def set_up(board)
-    (1..9).each_slice(3) {|i| board << i}
-
-    board.map! {|set| set.insert(1, "|").insert(3, "|").join("")}
-    p board
-    puts board
+  def set_up
+    board = Board.new
   end
 end
 
