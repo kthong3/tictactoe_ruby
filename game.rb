@@ -12,6 +12,9 @@ class Game
   def display_board
     puts @board
   end
+
+  private
+  attr_reader :board
 end
 
 game = Game.new

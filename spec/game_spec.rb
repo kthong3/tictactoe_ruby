@@ -5,8 +5,13 @@ describe Game do
 
   describe 'board structure' do
     describe '#board' do
-        it 'has a board'
-        it 'is empty'
+      it 'is an array' do
+        expect(game.send :board).to be_an Array
+      end
+
+      it 'is empty' do
+        expect(game.send :board.length).to eq 0
+      end
     end
 
     describe '#generate_board' do
