@@ -6,21 +6,15 @@ class Game
   def initialize
     @board = []
     generate_board
-    @players = []
-    create_players(@players)
   end
 
   def start
     display_board
   end
 
-  def create_players(players)
-    players << Player.new("Player One", "X")
-    players << Player.new("Player Two", "O")
-    p players
-  end
-
-  def over
+  def ask_for_location(player)
+    puts "#{player}, please enter the number where you'd like to mark"
+    response = gets.chomp
   end
 
   private
@@ -31,11 +25,14 @@ class Game
 
   def display_board
     puts self.board
-  end
-
-  def prompt_player
+    p self.board
   end
 end
+
+player_one = Player.new("Player One", "X")
+player_two = Player.new("Player Two", "O")
+
+players = [player_one, player_two]
 
 game = Game.new
 game.start
