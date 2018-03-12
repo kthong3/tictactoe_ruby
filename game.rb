@@ -18,11 +18,29 @@ class Game
     display_board
   end
 
+  def turn(player, letter)
+    move(player, letter)
+    display_board
+  end
+
+  private
+  def generate_board
+    1.upto(9) { |i| self.board << i.to_s }
+  end
+
+  def display_board
+    puts "#{board[0]} | #{board[1]} | #{board[2]}"
+    puts "----------"
+    puts "#{board[3]} | #{board[4]} | #{board[5]}"
+    puts "----------"
+    puts "#{board[6]} | #{board[7]} | #{board[8]}"
+  end
+
   def move(player, letter)
     location = ask_for_location(player)
     if is_valid_location?(location)
-      position = self.board.index(location)
-      self.board[position] = letter
+      valid_location = self.board.index(location)
+      self.board[valid_location] = letter
     else
       ask_for_location(player)
     end
@@ -40,20 +58,7 @@ class Game
   end
 
   def is_valid_location?(location)
-    p self.board.include?(location)
-  end
-
-  private
-  def generate_board
-    1.upto(9) { |i| self.board << i.to_s }
-  end
-
-  def display_board
-    puts "#{board[0]} | #{board[1]} | #{board[2]}"
-    puts "----------"
-    puts "#{board[3]} | #{board[4]} | #{board[5]}"
-    puts "----------"
-    puts "#{board[6]} | #{board[7]} | #{board[8]}"
+    self.board.include?(location)
   end
 end
 
@@ -65,4 +70,6 @@ players = [player_one, player_two]
 game = Game.new
 game.start
 
-game.move(player_one.player_number, player_one.letter)
+players.each do |player|
+  game.turn(player.player_number, player.letter)
+end
