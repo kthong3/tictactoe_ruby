@@ -1,7 +1,8 @@
 class Player
-  attr_reader :number
-  def initialize(args={})
-    @number = args[:number]
-    @letter = args[:letter]
+  attr_reader :player_number, :letter
+
+  def initialize(player_number, letter)
+    @player_number = player_number
+    @letter = letter
   end
 end

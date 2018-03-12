@@ -1,31 +1,32 @@
-require_relative 'board'
-require_relative 'player'
-
 class Game
-  def initialize
-    set_up
+  attr_accessor :board
+
+  def initialize(board)
+    @board = board
   end
 
-  def prompt(player)
-    puts "#{player}, please select the location by typing a number."
-    location = gets.chomp
+  def start
+    self.board.display
+  end
 
-    if location.scan(/\d+/).empty?
-      puts "Please select the location by typing a number."
-      location = gets.chomp
+  def turn(player)
+    chosen_location = ask_for_location(player)
+    valid_move = self.board.check_location(player, chosen_location)
+    self.board.display
+  end
+
+  def ask_for_location(player)
+    original_board = (1..9).to_a.join("").split("")
+    puts "#{player.player_number}, where do want to move? 1-9"
+    response = gets.chomp
+    while !original_board.include?(response) || !self.board.is_valid_location?(response)
+      puts "#{player.player_number}, please choose a valid number."
+      response = gets.chomp
     end
-
-    check_location(location)
+    response
   end
 
-  private
-  def set_up
-    board = Board.new
+  def over?
+    # winner or if filled
   end
 end
-
-game = Game.new
-player_1 = Player.new(number: "Player 1", letter: "X")
-player_2 = Player.new(number: "Player 2", letter: "O")
-
-game.prompt(player_1.number)
