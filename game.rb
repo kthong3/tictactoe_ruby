@@ -18,6 +18,16 @@ class Game
     display_board
   end
 
+  def move(player, letter)
+    location = ask_for_location(player)
+    if is_valid_location?(location)
+      position = self.board.index(location)
+      self.board[position] = letter
+    else
+      ask_for_location(player)
+    end
+  end
+
   def ask_for_location(player)
     original_board = (1..9).to_a.join("").split("")
     puts "#{player}, where do want to move? 1-9"
@@ -26,11 +36,16 @@ class Game
       puts "#{player}, please choose a number from the board."
       response = gets.chomp
     end
+    response
+  end
+
+  def is_valid_location?(location)
+    p self.board.include?(location)
   end
 
   private
   def generate_board
-    self.board = (1..9).to_a.join("").split("")
+    1.upto(9) { |i| self.board << i.to_s }
   end
 
   def display_board
@@ -50,4 +65,4 @@ players = [player_one, player_two]
 game = Game.new
 game.start
 
-game.ask_for_location(player_one.player_number)
+game.move(player_one.player_number, player_one.letter)
