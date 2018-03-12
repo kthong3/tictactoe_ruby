@@ -11,6 +11,6 @@ board = Board.new
 game = Game.new(board)
 game.start
 
-# players.each do |player|
-#   game.turn(player.player_number, player.letter)
-# end
+players.each do |player|
+  game.turn(player)
+end

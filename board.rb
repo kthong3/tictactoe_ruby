@@ -8,10 +8,10 @@ class Board
 
   def initialize
     @board = []
-    generate_board
+    generate
   end
 
-  def display_board
+  def display
     puts "#{self.board[0]} | #{self.board[1]} | #{self.board[2]}"
     puts "----------"
     puts "#{self.board[3]} | #{self.board[4]} | #{self.board[5]}"
@@ -19,22 +19,27 @@ class Board
     puts "#{self.board[6]} | #{self.board[7]} | #{self.board[8]}"
   end
 
-  private
-  def generate_board
-    1.upto(9) { |i| self.board << i.to_s }
-  end
-
-  def move(player, letter)
-    location = ask_for_location(player)
-    if is_valid_location?(location)
-      valid_location = self.board.index(location)
-      self.board[valid_location] = letter
+  def check_location(player, chosen_location)
+    if is_valid_location?(chosen_location)
+      mark_location(player, chosen_location)
+      return true
     else
-      ask_for_location(player)
+      return false
     end
   end
 
-  def is_valid_location?(location)
-    self.board.include?(location)
+  def mark_location(player, chosen_location)
+    valid_location = self.board.index(chosen_location)
+    self.board[valid_location] = player.letter
   end
+
+  def is_valid_location?(chosen_location)
+    self.board.include?(chosen_location)
+  end
+
+  private
+  def generate
+    1.upto(9) { |i| self.board << i.to_s }
+  end
+
 end
