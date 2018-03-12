@@ -25,4 +25,8 @@ class Game
     end
     response
   end
+
+  def over?
+    # winner or if filled
+  end
 end

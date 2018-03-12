@@ -14,3 +14,5 @@ game.start
 players.each do |player|
   game.turn(player)
 end
+
+board.find_x_locations

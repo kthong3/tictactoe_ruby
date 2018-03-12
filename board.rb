@@ -1,13 +1,15 @@
 class Board
-  attr_accessor :board
+  attr_accessor :board, :x_locations, :o_locations
   WINNING_LOCATIONS = [
-    [1, 2, 3], [4, 5, 6], [7, 8, 9], # horizontal
-    [1, 4, 7], [2, 5, 8], [3, 6, 9], # vertical
-    [1, 5, 9], [3, 5, 7]  # diagonal
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], # horizontal
+    [0, 3, 6], [1, 4, 7], [3, 6, 8], # vertical
+    [0, 4, 8], [3, 4, 6]  # diagonal
   ]
 
   def initialize
     @board = []
+    @x_locations = []
+    @o_locations = []
     generate
   end
 
@@ -37,9 +39,16 @@ class Board
     self.board.include?(chosen_location)
   end
 
+  def find_x_locations
+    self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
+  end
+
+  def find_o_locations
+    self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
+  end
+
   private
   def generate
     1.upto(9) { |i| self.board << i.to_s }
   end
-
 end
