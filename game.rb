@@ -1,5 +1,3 @@
-require_relative 'player'
-
 class Game
   attr_accessor :board
 
@@ -9,33 +7,20 @@ class Game
     [1, 5, 9], [3, 5, 7]  # diagonal
   ]
 
-  def initialize
-    @board = []
-    generate_board
+  def initialize(board)
+    @board = board
   end
 
   def start
-    display_board
+    self.board.display_board
   end
 
   def turn(player, letter)
     move(player, letter)
-    display_board
+    self.board.display_board
   end
 
   private
-  def generate_board
-    1.upto(9) { |i| self.board << i.to_s }
-  end
-
-  def display_board
-    puts "#{board[0]} | #{board[1]} | #{board[2]}"
-    puts "----------"
-    puts "#{board[3]} | #{board[4]} | #{board[5]}"
-    puts "----------"
-    puts "#{board[6]} | #{board[7]} | #{board[8]}"
-  end
-
   def move(player, letter)
     location = ask_for_location(player)
     if is_valid_location?(location)
@@ -56,20 +41,4 @@ class Game
     end
     response
   end
-
-  def is_valid_location?(location)
-    self.board.include?(location)
-  end
-end
-
-player_one = Player.new("Player One", "X")
-player_two = Player.new("Player Two", "O")
-
-players = [player_one, player_two]
-
-game = Game.new
-game.start
-
-players.each do |player|
-  game.turn(player.player_number, player.letter)
 end
