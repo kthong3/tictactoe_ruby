@@ -9,12 +9,13 @@ Game class
       # check if it is a valid move
       # has location been taken?
         # ask again if location has already been taken
-    # finds winner
-      # winning:
-        filling in a row, column or diagonal
-      game is over
+    game is over:
+      # finds winner
+        # winning:
+          filling in a row, column or diagonal
+      # draw
+        board is filled
 
 Player
-  chooses board location
   player one moves with X
   player two moves with O
