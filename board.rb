@@ -47,6 +47,17 @@ class Board
     self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
   end
 
+  # should be called only if there are 2 or more in location array
+  def any_matching_sets?(board_locations)
+    WINNING_LOCATIONS.each do |winning_set|
+      return true if winning_set == board_locations
+    end
+  end
+
+  def winner?
+
+  end
+
   private
   def generate
     1.upto(9) { |i| self.board << i.to_s }
