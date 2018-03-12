@@ -19,9 +19,13 @@ class Game
   end
 
   def ask_for_location(player)
-    puts "#{player}, where do want to move? 0-9"
+    original_board = (1..9).to_a.join("").split("")
+    puts "#{player}, where do want to move? 1-9"
     response = gets.chomp
-
+    while !original_board.include?(response)
+      puts "#{player}, please choose a number from the board."
+      response = gets.chomp
+    end
   end
 
   private
@@ -45,3 +49,5 @@ players = [player_one, player_two]
 
 game = Game.new
 game.start
+
+game.ask_for_location(player_one.player_number)
