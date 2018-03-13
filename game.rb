@@ -6,14 +6,19 @@ class Game
   end
 
   def start
+    puts "Starting 2 player Tic Tac Toe game..."
     self.board.display
   end
 
   def turn(player)
     if !self.board.filled?
       chosen_location = ask_for_location(player)
-      valid_move = self.board.check_location(player, chosen_location)
+      self.board.location_taken?(player, chosen_location)
+      if count_location(player) >= 3
+        check_for_winner(player)
+      end
       self.board.display
+      puts " "
     end
   end
 
@@ -30,23 +35,23 @@ class Game
     response
   end
 
-  # def count_location(player)
-  #   if player.letter == "X"
-  #     self.board.find_x_locations
-  #   elsif player.letter == "O"
-  #     self.board.find_o_locations
-  #   end
-  # end
+  def count_location(player)
+    if player.letter == "X"
+      self.board.find_x_locations
+    elsif player.letter == "O"
+      self.board.find_o_locations
+    end
+  end
 
-  # def find_set(player)
-  #   if player.letter == "X"
-  #     self.board.any_matching_sets?(self.board.x_locations)
-  #     p self.board.x_locations
-  #   else
-  #     self.board.any_matching_sets?(self.board.o_locations)
-  #     p self.board.o_locations
-  #   end
-  # end
+  def check_for_winner(player)
+    if player.letter == "X"
+      self.board.any_matching_sets?(self.board.x_locations)
+      p self.board.x_locations
+    else
+      self.board.any_matching_sets?(self.board.o_locations)
+      p self.board.o_locations
+    end
+  end
 
   # def winner(player)
   #   if over?

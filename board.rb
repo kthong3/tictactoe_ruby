@@ -4,8 +4,8 @@ class Board
   attr_accessor :board, :x_locations, :o_locations
   WINNING_LOCATIONS = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], # horizontal
-    [0, 3, 6], [1, 4, 7], [3, 6, 8], # vertical
-    [0, 4, 8], [3, 4, 6]  # diagonal
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], # vertical
+    [0, 4, 8], [2, 4, 6]  # diagonal
   ]
 
   def initialize
@@ -23,7 +23,7 @@ class Board
     puts "#{self.board[6]} | #{self.board[7]} | #{self.board[8]}"
   end
 
-  def check_location(player, chosen_location)
+  def location_taken?(player, chosen_location)
     if is_valid_location?(chosen_location)
       mark_location(player, chosen_location)
       return true
@@ -55,12 +55,11 @@ class Board
     self.o_locations.count
   end
 
-
   def any_matching_sets?(board_locations)
-    WINNING_LOCATIONS.each do |winning_set|
-      if winning_set.include?(board_locations)
-        return true
-      end
+    WINNING_LOCATIONS.each do |set|
+      set_string = set.join("")
+      p set_string
+      p board_locations.join("").include?(set_string)
     end
   end
 
