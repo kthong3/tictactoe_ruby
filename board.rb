@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
   attr_accessor :board, :x_locations, :o_locations
   WINNING_LOCATIONS = [
@@ -39,32 +41,32 @@ class Board
     self.board.include?(chosen_location)
   end
 
+#TODO: stop adding duplicates
   def find_x_locations
     self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
+    self.x_locations.uniq!
     self.x_locations.count
   end
 
+#TODO: stop adding duplicates
   def find_o_locations
     self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
+    self.o_locations.uniq!
     self.o_locations.count
   end
 
-  # should be called only if there are 2 or more in location array
+
   def any_matching_sets?(board_locations)
     WINNING_LOCATIONS.each do |winning_set|
-      if winning_set == board_locations
+      if winning_set.include?(board_locations)
         return true
       end
     end
   end
 
-  # game will end if board is filled
+  # should automatically end if no numbers are left on the board
   def filled?
-    self.board.each do |location|
-      if location.scan(/\d+/).empty?
-        return true
-      end
-    end
+    self.board.join("").scan(/\d+/).empty?
   end
 
   private
