@@ -38,12 +38,10 @@ class Game
     self.winner_was_found = self.board.any_matching_sets?(player.letter)
   end
 
-  def winner(player)
+  def declare_winner(player)
     if self.over?
       if self.board.any_matching_sets?(player.letter)
         puts "#{player.player_number} wins!"
-      else
-        puts "It's a Cat's Game!"
       end
     end
   end
