@@ -8,9 +8,9 @@ class Board
 
   def initialize
     @board = []
+    generate
     @x_locations = []
     @o_locations = []
-    generate
   end
 
   def display
@@ -50,12 +50,19 @@ class Board
   # should be called only if there are 2 or more in location array
   def any_matching_sets?(board_locations)
     WINNING_LOCATIONS.each do |winning_set|
-      return true if winning_set == board_locations
+      if winning_set == board_locations
+        return true
+      end
     end
   end
 
-  def winner?
-
+  # game will end if board is filled
+  def filled?
+    self.board.each do |location|
+      if location.scan(/\d+/).empty?
+        return true
+      end
+    end
   end
 
   private

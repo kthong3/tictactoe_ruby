@@ -12,7 +12,16 @@ class Game
   def turn(player)
     chosen_location = ask_for_location(player)
     valid_move = self.board.check_location(player, chosen_location)
+    self.add_location(player)
     self.board.display
+  end
+
+  def add_location(player)
+    if player.letter == "X"
+      self.board.find_x_locations
+    elsif player.letter == "O"
+      self.board.find_o_locations
+    end
   end
 
   def ask_for_location(player)
@@ -26,7 +35,19 @@ class Game
     response
   end
 
+  def winner
+    if self.over?
+      if self.board.any_matching_sets?(self.board.x_locations)
+        puts "Player One wins!"
+      elsif self.board.any_matching_sets?(self.board.o_locations)
+        puts "Player Two wins"
+      else
+        puts "It's a DRAW!"
+      end
+    end
+  end
+
   def over?
-    # winner or if filled
+    self.board.filled?
   end
 end
