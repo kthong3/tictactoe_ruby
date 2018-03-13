@@ -1,8 +1,9 @@
 class Game
-  attr_accessor :board
+  attr_accessor :board, :winner_was_found
 
   def initialize(board)
     @board = board
+    @winner_was_found = false
   end
 
   def start
@@ -34,23 +35,23 @@ class Game
   end
 
   def did_win?(player)
-    self.board.any_matching_sets?(player.letter)
+    self.winner_was_found = self.board.any_matching_sets?(player.letter)
   end
 
-  # def winner(player)
+  # def winner
   #   if over?
-  #     if self.board.any_matching_sets?(self.board.x_locations)
+  #     if self.board.any_matching_sets?(letter)
   #       puts "Player One wins!"
-  #     elsif self.board.any_matching_sets?(self.board.o_locations)
-  #       puts "Player Two wins"
+  #     elsif self.board.any_matching_sets?(s)
+  #       puts "Player Two wins!"
   #     else
-  #       puts "It's a DRAW!"
+  #       puts "It's a Cat's Game!"
   #     end
   #   end
   # end
 
   # automatically end if board is filled
   def over?
-    self.board.filled?
+    self.winner_was_found || self.board.filled?
   end
 end

@@ -44,7 +44,6 @@ class Board
     if letter == "X"
       self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
       self.x_locations.uniq!
-      self.x_locations
     else
       self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
       self.o_locations.uniq!
@@ -67,6 +66,7 @@ class Board
         end
       end
     end
+    false
   end
 
   def filled?
