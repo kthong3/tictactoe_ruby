@@ -1,5 +1,3 @@
-require 'pry'
-
 class Board
   attr_accessor :board, :x_locations, :o_locations
   WINNING_LOCATIONS = [
@@ -42,28 +40,35 @@ class Board
   end
 
 #TODO: stop adding duplicates
-  def find_x_locations
-    self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
-    self.x_locations.uniq!
-    self.x_locations.count
-  end
-
-#TODO: stop adding duplicates
-  def find_o_locations
-    self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
-    self.o_locations.uniq!
-    self.o_locations.count
-  end
-
-  def any_matching_sets?(board_locations)
-    WINNING_LOCATIONS.each do |set|
-      set_string = set.join("")
-      p set_string
-      p board_locations.join("").include?(set_string)
+  def add_locations(letter)
+    if letter == "X"
+      self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
+      self.x_locations.uniq!
+      self.x_locations
+    else
+      self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
+      self.o_locations.uniq!
     end
   end
 
-  # should automatically end if no numbers are left on the board
+  def any_matching_sets?(letter)
+    if letter == "X"
+      WINNING_LOCATIONS.each do |set|
+        set_string = set.join("")
+        if self.x_locations.join("").include?(set_string)
+          return true
+        end
+      end
+    else
+      WINNING_LOCATIONS.each do |set|
+        set_string = set.join("")
+        if self.o_locations.join("").include?(set_string)
+          return true
+        end
+      end
+    end
+  end
+
   def filled?
     self.board.join("").scan(/\d+/).empty?
   end

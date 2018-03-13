@@ -14,9 +14,7 @@ class Game
     if !self.board.filled?
       chosen_location = ask_for_location(player)
       self.board.location_taken?(player, chosen_location)
-      if count_location(player) >= 3
-        check_for_winner(player)
-      end
+      self.board.add_locations(player.letter)
       self.board.display
       puts " "
     end
@@ -35,22 +33,8 @@ class Game
     response
   end
 
-  def count_location(player)
-    if player.letter == "X"
-      self.board.find_x_locations
-    elsif player.letter == "O"
-      self.board.find_o_locations
-    end
-  end
-
-  def check_for_winner(player)
-    if player.letter == "X"
-      self.board.any_matching_sets?(self.board.x_locations)
-      p self.board.x_locations
-    else
-      self.board.any_matching_sets?(self.board.o_locations)
-      p self.board.o_locations
-    end
+  def did_win?(player)
+    self.board.any_matching_sets?(player.letter)
   end
 
   # def winner(player)
@@ -65,6 +49,7 @@ class Game
   #   end
   # end
 
+  # automatically end if board is filled
   def over?
     self.board.filled?
   end
