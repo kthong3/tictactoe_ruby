@@ -41,10 +41,12 @@ class Board
 
   def find_x_locations
     self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
+    self.x_locations.count
   end
 
   def find_o_locations
     self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
+    self.o_locations.count
   end
 
   # should be called only if there are 2 or more in location array

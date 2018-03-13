@@ -12,16 +12,10 @@ class Game
   def turn(player)
     chosen_location = ask_for_location(player)
     valid_move = self.board.check_location(player, chosen_location)
-    self.add_location(player)
-    self.board.display
-  end
-
-  def add_location(player)
-    if player.letter == "X"
-      self.board.find_x_locations
-    elsif player.letter == "O"
-      self.board.find_o_locations
+    if self.add_location(player) >= 2
+      p "YES"
     end
+    self.board.display
   end
 
   def ask_for_location(player)
@@ -30,9 +24,18 @@ class Game
     response = gets.chomp
     while !original_board.include?(response) || !self.board.is_valid_location?(response)
       puts "#{player.player_number}, please choose a valid number."
+      self.board.display
       response = gets.chomp
     end
     response
+  end
+
+  def add_location(player)
+    if player.letter == "X"
+      self.board.find_x_locations
+    elsif player.letter == "O"
+      self.board.find_o_locations
+    end
   end
 
   def winner
