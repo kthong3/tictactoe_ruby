@@ -15,9 +15,8 @@ until game.over?
   players.each do |player|
     game.turn(player)
     if game.did_win?(player)
+      game.winner(player)
       break
     end
   end
 end
-
-puts "end"

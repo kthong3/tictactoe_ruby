@@ -54,14 +54,14 @@ class Board
     if letter == "X"
       WINNING_LOCATIONS.each do |set|
         set_string = set.join("")
-        if self.x_locations.join("").include?(set_string)
+        if self.x_locations.sort.join("").include?(set_string)
           return true
         end
       end
     else
       WINNING_LOCATIONS.each do |set|
         set_string = set.join("")
-        if self.o_locations.join("").include?(set_string)
+        if self.o_locations.sort.join("").include?(set_string)
           return true
         end
       end
