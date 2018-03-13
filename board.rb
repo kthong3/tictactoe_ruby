@@ -41,29 +41,30 @@ class Board
 
 #TODO: stop adding duplicates
   def add_locations(letter)
+    location_set = []
     if letter == "X"
-      self.board.each_with_index { |x,index| self.x_locations << index if x == "X"}
-      self.x_locations.uniq!
+      location_set = self.x_locations
     else
-      self.board.each_with_index { |o,index| self.o_locations << index if o == "O"}
-      self.o_locations.uniq!
+      location_set = self.o_locations
     end
+
+    self.board.each_with_index { |board_letter,index| location_set << index if board_letter == letter}
+    location_set.uniq!
+
   end
 
   def any_matching_sets?(letter)
+    location_set = []
     if letter == "X"
-      WINNING_LOCATIONS.each do |set|
-        set_string = set.join("")
-        if self.x_locations.sort.join("").include?(set_string)
-          return true
-        end
-      end
+      location_set = self.x_locations
     else
-      WINNING_LOCATIONS.each do |set|
-        set_string = set.join("")
-        if self.o_locations.sort.join("").include?(set_string)
-          return true
-        end
+      location_set = self.o_locations
+    end
+
+    WINNING_LOCATIONS.each do |set|
+      set_string = set.join("")
+      if location_set.sort.join("").include?(set_string)
+        return true
       end
     end
     false

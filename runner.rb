@@ -1,7 +1,6 @@
 require_relative 'game'
 require_relative 'board'
 require_relative 'player'
-require 'pry'
 
 player_one = Player.new("Player One", "X")
 player_two = Player.new("Player Two", "O")
@@ -15,8 +14,11 @@ until game.over?
   players.each do |player|
     game.turn(player)
     if game.did_win?(player)
-      game.winner(player)
+      game.declare_winner(player)
       break
     end
+  end
+  if game.board.filled?
+    puts "It's a Cat's Game!"
   end
 end
