@@ -1,5 +1,6 @@
 class Board
-  attr_accessor :board, :x_locations, :o_locations
+  attr_accessor :board
+
   WINNING_LOCATIONS = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], # horizontal
     [0, 3, 6], [1, 4, 7], [2, 5, 8], # vertical
@@ -9,8 +10,6 @@ class Board
   def initialize
     @board = []
     generate
-    @x_locations = []
-    @o_locations = []
   end
 
   def display
@@ -40,30 +39,15 @@ class Board
   end
 
 #TODO: stop adding duplicates
-  def add_locations(letter)
-    location_set = []
-    if letter == "X"
-      location_set = self.x_locations
-    else
-      location_set = self.o_locations
-    end
-
-    self.board.each_with_index { |board_letter,index| location_set << index if board_letter == letter}
-    location_set.uniq!
-
+  def add_locations(player)
+    self.board.each_with_index { |board_letter, index| player.location_set << index if board_letter == player.letter}
+    player.location_set.uniq!
   end
 
-  def any_matching_sets?(letter)
-    location_set = []
-    if letter == "X"
-      location_set = self.x_locations
-    else
-      location_set = self.o_locations
-    end
-
+  def any_matching_sets?(player)
     WINNING_LOCATIONS.each do |set|
       set_string = set.join("")
-      if location_set.sort.join("").include?(set_string)
+      if player.location_set.sort.join("").include?(set_string)
         return true
       end
     end

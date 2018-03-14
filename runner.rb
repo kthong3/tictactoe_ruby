@@ -2,8 +2,8 @@ require_relative 'game'
 require_relative 'board'
 require_relative 'player'
 
-player_one = Player.new("Player One", "X")
-player_two = Player.new("Player Two", "O")
+player_one = Player.new("Player Unicorn", "🦄")
+player_two = Player.new("Player Poo", "💩")
 players = [player_one, player_two]
 
 board = Board.new
@@ -19,6 +19,6 @@ until game.over?
     end
   end
   if game.board.filled?
-    puts "It's a Cat's Game!"
+    puts "It's a 🐱  Game!"
   end
 end
