@@ -20,15 +20,6 @@ class Board
     puts "#{self.board[6]} | #{self.board[7]} | #{self.board[8]}"
   end
 
-  def location_taken?(player, chosen_location)
-    if is_valid_location?(chosen_location)
-      mark_location(player, chosen_location)
-      return true
-    else
-      return false
-    end
-  end
-
   def mark_location(player, chosen_location)
     valid_location = self.board.index(chosen_location)
     self.board[valid_location] = player.letter
@@ -38,8 +29,8 @@ class Board
     self.board.include?(chosen_location)
   end
 
-#TODO: stop adding duplicates
-  def add_locations(player)
+  def add_position(player, chosen_location)
+    mark_location(player, chosen_location)
     self.board.each_with_index { |board_letter, index| player.location_set << index if board_letter == player.letter}
     player.location_set.uniq!
   end
