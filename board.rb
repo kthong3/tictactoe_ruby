@@ -38,8 +38,7 @@ class Board
     self.board.include?(chosen_location)
   end
 
-#TODO: stop adding duplicates
-  def add_locations(player)
+  def add_position(player)
     self.board.each_with_index { |board_letter, index| player.location_set << index if board_letter == player.letter}
     player.location_set.uniq!
   end

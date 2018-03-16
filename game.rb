@@ -6,17 +6,32 @@ class Game
     @winner_was_found = false
   end
 
-  def start
-    puts "Starting 2 player Tic Tac Toe game..."
+  def start(players)
+    puts "Starting 2 Player Tic Tac Toe game..."
     self.board.display
     puts " "
+    self.play(players)
+  end
+
+  def play(players)
+    until self.over?
+      players.each do |player|
+        self.turn(player)
+        if self.did_win?(player)
+          self.declare_winner(player)
+          break
+        end
+      end
+      declare_draw
+    end
   end
 
   def turn(player)
     if !self.board.filled?
       chosen_location = ask_for_location(player)
-      self.board.location_taken?(player, chosen_location)
-      self.board.add_locations(player)
+      if self.board.is_valid_location?(chosen_location)
+        self.board.add_position(player, chosen_location)
+      end
       self.board.display
       puts " "
     end
@@ -40,14 +55,15 @@ class Game
   end
 
   def declare_winner(player)
-    if self.over?
-      if self.board.any_matching_sets?(player)
-        puts "#{player.player_number} wins!"
-      end
+    puts "#{player.player_number} wins!"
+  end
+
+  def declare_draw
+    if self.board.filled?
+      puts "It's a 🐱  Game!"
     end
   end
 
-  # automatically end if board is filled
   def over?
     self.winner_was_found || self.board.filled?
   end
