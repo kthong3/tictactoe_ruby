@@ -10,4 +10,10 @@ describe Player do
   it 'has a letter' do
     expect(player.letter).to eq "K"
   end
+
+  it 'has an empty location set' do
+    expect(player.location_set). to eq []
+    expect(player.location_set.empty?).to be true
+  end
+
 end
