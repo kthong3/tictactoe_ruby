@@ -6,10 +6,21 @@ class Game
     @winner_was_found = false
   end
 
-  def start
+  def start(players)
     puts "Starting 2 player Tic Tac Toe game..."
     self.board.display
     puts " "
+    until self.over?
+      players.each do |player|
+        self.turn(player)
+        if self.did_win?(player)
+          self.declare_winner(player)
+          break
+        elsif self.board.filled?
+          puts "It's a 🐱  Game!"
+        end
+      end
+    end
   end
 
   def turn(player)
