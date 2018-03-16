@@ -29,8 +29,9 @@ class Game
   def turn(player)
     if !self.board.filled?
       chosen_location = ask_for_location(player)
-      self.board.location_taken?(player, chosen_location)
-      self.board.add_position(player)
+      if self.board.is_valid_location?(chosen_location)
+        self.board.add_position(player, chosen_location)
+      end
       self.board.display
       puts " "
     end
@@ -59,7 +60,7 @@ class Game
 
   def declare_draw
     if self.board.filled?
-        puts "It's a 🐱  Game!"
+      puts "It's a 🐱  Game!"
     end
   end
 
