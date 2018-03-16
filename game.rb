@@ -22,9 +22,7 @@ class Game
           break
         end
       end
-      if self.board.filled?
-        puts "It's a 🐱  Game!"
-      end
+      declare_draw
     end
   end
 
@@ -56,14 +54,15 @@ class Game
   end
 
   def declare_winner(player)
-    if self.over?
-      if self.board.any_matching_sets?(player)
-        puts "#{player.player_number} wins!"
-      end
+    puts "#{player.player_number} wins!"
+  end
+
+  def declare_draw
+    if self.board.filled?
+        puts "It's a 🐱  Game!"
     end
   end
 
-  # automatically end if board is filled
   def over?
     self.winner_was_found || self.board.filled?
   end
