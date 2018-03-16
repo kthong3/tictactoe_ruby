@@ -32,7 +32,7 @@ class Game
     if !self.board.filled?
       chosen_location = ask_for_location(player)
       self.board.location_taken?(player, chosen_location)
-      self.board.add_locations(player)
+      self.board.add_position(player)
       self.board.display
       puts " "
     end
