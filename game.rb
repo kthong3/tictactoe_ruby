@@ -7,18 +7,23 @@ class Game
   end
 
   def start(players)
-    puts "Starting 2 player Tic Tac Toe game..."
+    puts "Starting 2 Player Tic Tac Toe game..."
     self.board.display
     puts " "
+    self.play(players)
+  end
+
+  def play(players)
     until self.over?
       players.each do |player|
         self.turn(player)
         if self.did_win?(player)
           self.declare_winner(player)
           break
-        elsif self.board.filled?
-          puts "It's a 🐱  Game!"
         end
+      end
+      if self.board.filled?
+        puts "It's a 🐱  Game!"
       end
     end
   end
