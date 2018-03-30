@@ -18,6 +18,7 @@ class Board
     puts "#{self.board[3]} | #{self.board[4]} | #{self.board[5]}"
     puts "----------"
     puts "#{self.board[6]} | #{self.board[7]} | #{self.board[8]}"
+    puts " "
   end
 
   def mark_location(player, chosen_location)
