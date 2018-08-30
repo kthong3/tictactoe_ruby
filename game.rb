@@ -9,7 +9,6 @@ class Game
   def start(players)
     puts "Starting 2 Player Tic Tac Toe game..."
     self.board.display
-    puts " "
     self.play(players)
   end
 
@@ -22,8 +21,8 @@ class Game
           break
         end
       end
-      declare_draw
     end
+    declare_draw
   end
 
   def turn(player)
@@ -33,7 +32,6 @@ class Game
         self.board.add_position(player, chosen_location)
       end
       self.board.display
-      puts " "
     end
   end
 
@@ -59,9 +57,7 @@ class Game
   end
 
   def declare_draw
-    if self.board.filled?
-      puts "It's a 🐱  Game!"
-    end
+    puts "It's a 🐱  Game!"
   end
 
   def over?
